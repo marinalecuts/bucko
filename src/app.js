@@ -37,8 +37,9 @@ router.get('/', async (ctx) => {
 	// ctx.state.message = 'Hello, world!';
 
 	// use this to see calls to the Tradeshift API working
-	const { CompanyName } = await ts.getAccount(ctx);
-	ctx.state.message = `Hello developer from ${CompanyName}!`;
+	// const { CompanyName } = await ts.getAccount(ctx);
+	// ctx.state.message = `Hello developer from ${CompanyName}!`;
+	ctx.state.message = `Hello, Collaboration user!`;
 
 	// render the message in the view
 	await ctx.render('view');

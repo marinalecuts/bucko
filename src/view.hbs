@@ -5,6 +5,39 @@
 	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Bucko</title>
 	<script src="//d5wfroyti11sa.cloudfront.net/prod/client/ts-9.2.4.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://unpkg.com/@tradeshift/io/lib/ts.io-umd.js"></script>
+
+	<script type = "text/JavaScript">
+		function openCollaboration() {
+			console.log('### 3rd-party app sending event', ts);
+
+			var app = ts.io();
+			const OPEN_COLLABORATION_EVENT = 'ts-collaboration-open-v3';
+
+			const subjectId = $('#subjectId')[0].value;
+			const audience = $('#audience')[0].value.split(',');
+
+			const data = {
+				subjectType: 'external-document',
+				subjectId,
+				audience
+			};
+
+			app.emit(OPEN_COLLABORATION_EVENT, data, 'Tradeshift.UniversalInbox');
+
+			// const data = {
+			// 	subjectType: 'external-document',
+			// 	subjectId: 'e2e4ec41-b718-4155-bea9-bb5bd7af35c0',
+			// 	audience: ['e9a6bc6c-7cf7-46f2-b628-b02d04ff2369', 'fe89daf8-9d1a-45a2-bc2d-ba71c72f09e5']
+			// // e9a6bc6c-7cf7-46f2-b628-b02d04ff2369,fe89daf8-9d1a-45a2-bc2d-ba71c72f09e5
+			// };
+
+			// app.emit(OPEN_COLLABORATION_EVENT, data, 'Tradeshift.UniversalInbox');
+
+			console.log('### 3rd-party app sent event', ts);
+		}
+	</script>
 	<style>
 		h1 {
 			margin-top: 44px;
@@ -16,6 +49,33 @@
 	<header data-ts="TopBar"></header>
 	<main data-ts="Main">
 		<h1>{{message}}</h1>
+
+		<div class="content-left">
+			<form data-ts="Form">
+				<fieldset>
+					<label>
+						<span>subject Id</span>
+						<input type="text" id="subjectId"/>
+					</label>
+				</fieldset>
+				<fieldset>
+					<label>
+						<span>audience - company ids (comma separated, no spaces)</span>
+						<input type="text" id="audience"/>
+					</label>
+				</fieldset>
+
+				<fieldset>
+					<button data-ts="Button"
+									type="submit"
+									class="ts-primary tst-open-conversation"
+									onClick="openCollaboration();">
+						<span>Open Collaboration</span>
+					</button>
+				</fieldset>
+			</form>
+		</div>
+
 	</main>
 </body>
 </html>
