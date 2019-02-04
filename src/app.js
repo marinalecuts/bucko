@@ -40,6 +40,7 @@ router.get('/', async (ctx) => {
 	// const { CompanyName } = await ts.getAccount(ctx);
 	// ctx.state.message = `Hello developer from ${CompanyName}!`;
 	ctx.state.message = `Hello, Collaboration user!`;
+	ctx.state.currentCompanyId = ctx.state.user.companyId;
 
 	// render the message in the view
 	await ctx.render('view');
