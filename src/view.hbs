@@ -10,7 +10,7 @@
 
 	<script type = "text/JavaScript">
 		function openCollaboration() {
-			console.log('### 3rd-party app sending event', ts);
+			console.log('### 3rd-party app sending event - start', ts);
 
 			var app = ts.io();
 			const OPEN_COLLABORATION_EVENT = 'ts-collaboration-open-v3';
@@ -18,14 +18,19 @@
 			const subjectId = $('#subjectId')[0].value;
 			const audience = $('#audience')[0].value.split(',');
 			const title = $('#title')[0].value;
+			const defaultParticipantsString = $('#defaultParticipants')[0].value;
+			const defaultParticipants = defaultParticipantsString ? JSON.parse(defaultParticipantsString) : null;
 
 			const data = {
 				subjectType: 'EXTERNAL_DOCUMENT',
 				subjectId,
 				source: 'Quyntess',
 				audience,
-				title
+				title,
+				defaultParticipants
 			};
+
+			console.log('### 3rd-party app sending event with data:', data);
 
 			app.emit(OPEN_COLLABORATION_EVENT, data, 'Tradeshift.UniversalInbox');
 
@@ -38,7 +43,7 @@
 
 			// app.emit(OPEN_COLLABORATION_EVENT, data, 'Tradeshift.UniversalInbox');
 
-			console.log('### 3rd-party app sent event', ts);
+			console.log('### 3rd-party app sent event - end');
 		}
 	</script>
 	<style>
@@ -72,6 +77,20 @@
 					<label>
 						<span>Title</span>
 						<input type="text" id="title"/>
+					</label>
+				</fieldset>
+
+				<fieldset>
+					<label>
+						<span>Default participants</span>
+						<textarea id="defaultParticipants"></textarea>
+					</label>
+					<label>
+						<textarea disabled style="height: 100px;">
+[
+	{ "companyId": "", "userId": "" },
+	{ "companyId": "", "userId": "" }
+]</textarea>
 					</label>
 				</fieldset>
 
