@@ -18,8 +18,8 @@
 			const subjectId = $('#subjectId')[0].value;
 			const audience = $('#audience')[0].value.split(',');
 			const title = $('#title')[0].value;
-			const defaultParticipantsString = $('#defaultParticipants')[0].value;
-			const defaultParticipants = defaultParticipantsString ? JSON.parse(defaultParticipantsString) : null;
+			const initialParticipantsString = $('#initialParticipants')[0].value;
+			const initialParticipants = initialParticipantsString ? JSON.parse(initialParticipantsString) : null;
 
 			const data = {
 				subjectType: 'EXTERNAL_DOCUMENT',
@@ -27,7 +27,7 @@
 				source: 'Quyntess',
 				audience,
 				title,
-				defaultParticipants
+				initialParticipants
 			};
 
 			console.log('### 3rd-party app sending event with data:', data);
@@ -82,8 +82,8 @@
 
 				<fieldset>
 					<label>
-						<span>Default participants</span>
-						<textarea id="defaultParticipants"></textarea>
+						<span>Initial participants</span>
+						<textarea id="initialParticipants"></textarea>
 					</label>
 					<label>
 						<textarea disabled style="height: 100px;">
